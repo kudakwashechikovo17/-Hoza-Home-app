@@ -153,3 +153,383 @@ const ApplyForRentalScreen = ({ route, navigation }) => {
         <Text
           style={[styles.documentName, { color: theme.colors.textPrimary, fontFamily: 'poppins-regular' }]}
           numberOfLines={
+            style={[styles.documentName, { color: theme.colors.textPrimary, fontFamily: 'poppins-regular' }]}
+          numberOfLines={1}
+        >
+          {document.name}
+        </Text>
+      </View>
+      <TouchableOpacity
+        style={styles.removeDocumentButton}
+        onPress={() => handleRemoveDocument(document.id)}
+      >
+        <MaterialCommunityIcons name="close" size={20} color={theme.colors.error} />
+      </TouchableOpacity>
+    </View>
+  );
+
+  return (
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]} edges={['top']}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{ flex: 1 }}
+      >
+        <View style={styles.header}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => navigation.goBack()}
+          >
+            <MaterialCommunityIcons name="arrow-left" size={24} color={theme.colors.textPrimary} />
+          </TouchableOpacity>
+          <Text style={[styles.headerTitle, { color: theme.colors.textPrimary, fontFamily: 'poppins-semibold' }]}>
+            Apply for Rental
+          </Text>
+          <View style={styles.headerRight} />
+        </View>
+
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollContent}
+        >
+          {/* Property Card */}
+          <Card style={styles.propertyCard}>
+            <View style={styles.propertyCardContent}>
+              <Image
+                source={{ uri: property.images[0] }}
+                style={styles.propertyImage}
+                resizeMode="cover"
+              />
+              <View style={styles.propertyInfo}>
+                <Text
+                  style={[styles.propertyTitle, { color: theme.colors.textPrimary, fontFamily: 'poppins-medium' }]}
+                  numberOfLines={2}
+                >
+                  {property.title}
+                </Text>
+                <Text
+                  style={[styles.propertyLocation, { color: theme.colors.textSecondary, fontFamily: 'poppins-regular' }]}
+                  numberOfLines={1}
+                >
+                  {property.location}
+                </Text>
+                <Text
+                  style={[styles.propertyPrice, { color: theme.colors.primary, fontFamily: 'poppins-semibold' }]}
+                >
+                  ${property.price}/mo
+                </Text>
+              </View>
+            </View>
+          </Card>
+
+          <View style={styles.sectionTitle}>
+            <Text style={[styles.sectionTitleText, { color: theme.colors.textPrimary, fontFamily: 'poppins-semibold' }]}>
+              Application Form
+            </Text>
+            <Text style={[styles.sectionSubtitle, { color: theme.colors.textSecondary, fontFamily: 'poppins-regular' }]}>
+              Please fill in your details to apply for this property
+            </Text>
+          </View>
+
+          <Formik
+            initialValues={{
+              fullName: user.name || '',
+              email: user.email || '',
+              phone: user.phone || '',
+              occupation: '',
+              income: '',
+              moveInDate: '',
+              tenants: '1',
+              additionalInfo: '',
+            }}
+            validationSchema={ApplicationSchema}
+            onSubmit={handleSubmitApplication}
+          >
+            {({
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              values,
+              errors,
+              touched,
+              setFieldValue,
+            }) => (
+              <View style={styles.formContainer}>
+                <Input
+                  label="Full Name"
+                  placeholder="Enter your full name"
+                  value={values.fullName}
+                  onChangeText={handleChange('fullName')}
+                  onBlur={handleBlur('fullName')}
+                  error={errors.fullName}
+                  touched={touched.fullName}
+                  icon="account-outline"
+                />
+
+                <Input
+                  label="Email"
+                  placeholder="Enter your email"
+                  value={values.email}
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  error={errors.email}
+                  touched={touched.email}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  icon="email-outline"
+                />
+
+                <Input
+                  label="Phone Number"
+                  placeholder="Enter your phone number"
+                  value={values.phone}
+                  onChangeText={handleChange('phone')}
+                  onBlur={handleBlur('phone')}
+                  error={errors.phone}
+                  touched={touched.phone}
+                  keyboardType="phone-pad"
+                  icon="phone-outline"
+                />
+
+                <Input
+                  label="Occupation"
+                  placeholder="Enter your occupation"
+                  value={values.occupation}
+                  onChangeText={handleChange('occupation')}
+                  onBlur={handleBlur('occupation')}
+                  error={errors.occupation}
+                  touched={touched.occupation}
+                  icon="briefcase-outline"
+                />
+
+                <Input
+                  label="Monthly Income (USD)"
+                  placeholder="Enter your monthly income"
+                  value={values.income}
+                  onChangeText={handleChange('income')}
+                  onBlur={handleBlur('income')}
+                  error={errors.income}
+                  touched={touched.income}
+                  keyboardType="numeric"
+                  icon="cash-multiple"
+                />
+
+                <Input
+                  label="Preferred Move-in Date"
+                  placeholder="YYYY-MM-DD"
+                  value={values.moveInDate}
+                  onChangeText={handleChange('moveInDate')}
+                  onBlur={handleBlur('moveInDate')}
+                  error={errors.moveInDate}
+                  touched={touched.moveInDate}
+                  icon="calendar"
+                />
+
+                <Input
+                  label="Number of Tenants"
+                  placeholder="Enter number of tenants"
+                  value={values.tenants}
+                  onChangeText={handleChange('tenants')}
+                  onBlur={handleBlur('tenants')}
+                  error={errors.tenants}
+                  touched={touched.tenants}
+                  keyboardType="numeric"
+                  icon="account-group"
+                />
+
+                <Input
+                  label="Additional Information (Optional)"
+                  placeholder="Enter any additional information you want to share"
+                  value={values.additionalInfo}
+                  onChangeText={handleChange('additionalInfo')}
+                  onBlur={handleBlur('additionalInfo')}
+                  error={errors.additionalInfo}
+                  touched={touched.additionalInfo}
+                  multiline
+                  numberOfLines={4}
+                  icon="information-outline"
+                />
+
+                <View style={styles.documentsSection}>
+                  <Text style={[styles.documentsSectionTitle, { color: theme.colors.textPrimary, fontFamily: 'poppins-semibold' }]}>
+                    Upload Documents
+                  </Text>
+                  <Text style={[styles.documentsSectionSubtitle, { color: theme.colors.textSecondary, fontFamily: 'poppins-regular' }]}>
+                    Please upload your ID, proof of income, and any other relevant documents
+                  </Text>
+
+                  {documents.length > 0 && (
+                    <View style={styles.documentsList}>
+                      {documents.map(renderDocumentItem)}
+                    </View>
+                  )}
+
+                  <Button
+                    title={uploadingImage ? 'Uploading...' : 'Select Documents'}
+                    onPress={handleSelectDocument}
+                    variant="outlined"
+                    size="medium"
+                    disabled={uploadingImage}
+                    icon={
+                      uploadingImage ? (
+                        <ActivityIndicator size="small" color={theme.colors.primary} />
+                      ) : (
+                        <MaterialCommunityIcons name="file-upload-outline" size={20} color={theme.colors.primary} />
+                      )
+                    }
+                    style={{ marginTop: 12 }}
+                  />
+                </View>
+
+                <View style={styles.termsContainer}>
+                  <MaterialCommunityIcons
+                    name="checkbox-marked"
+                    size={24}
+                    color={theme.colors.primary}
+                  />
+                  <Text
+                    style={[
+                      styles.termsText,
+                      { color: theme.colors.textSecondary, fontFamily: 'poppins-regular' },
+                    ]}
+                  >
+                    By submitting this application, I confirm that all the information provided is true and accurate. I understand that providing false information may result in rejection of my application.
+                  </Text>
+                </View>
+
+                <Button
+                  title={submitting ? 'Submitting...' : 'Submit Application'}
+                  onPress={handleSubmit}
+                  variant="primary"
+                  size="large"
+                  fullWidth
+                  loading={submitting}
+                  disabled={submitting}
+                  style={{ marginTop: 24 }}
+                />
+              </View>
+            )}
+          </Formik>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
+  },
+  backButton: {
+    padding: 8,
+  },
+  headerTitle: {
+    fontSize: 18,
+  },
+  headerRight: {
+    width: 40,
+  },
+  scrollContent: {
+    padding: 16,
+    paddingBottom: 40,
+  },
+  propertyCard: {
+    marginBottom: 24,
+  },
+  propertyCardContent: {
+    flexDirection: 'row',
+    padding: 12,
+  },
+  propertyImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 8,
+  },
+  propertyInfo: {
+    flex: 1,
+    marginLeft: 12,
+    justifyContent: 'space-between',
+  },
+  propertyTitle: {
+    fontSize: 16,
+    marginBottom: 4,
+  },
+  propertyLocation: {
+    fontSize: 14,
+    marginBottom: 4,
+  },
+  propertyPrice: {
+    fontSize: 18,
+  },
+  sectionTitle: {
+    marginBottom: 16,
+  },
+  sectionTitleText: {
+    fontSize: 20,
+    marginBottom: 4,
+  },
+  sectionSubtitle: {
+    fontSize: 14,
+  },
+  formContainer: {
+    marginBottom: 24,
+  },
+  documentsSection: {
+    marginTop: 16,
+    marginBottom: 24,
+  },
+  documentsSectionTitle: {
+    fontSize: 16,
+    marginBottom: 4,
+  },
+  documentsSectionSubtitle: {
+    fontSize: 14,
+    marginBottom: 16,
+  },
+  documentsList: {
+    marginBottom: 16,
+  },
+  documentItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 8,
+  },
+  documentInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  documentName: {
+    fontSize: 14,
+    marginLeft: 8,
+    flex: 1,
+  },
+  removeDocumentButton: {
+    padding: 4,
+  },
+  termsContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginTop: 16,
+  },
+  termsText: {
+    fontSize: 14,
+    marginLeft: 8,
+    flex: 1,
+    lineHeight: 20,
+  },
+});
+
+export default ApplyForRentalScreen;
