@@ -728,3 +728,181 @@ const styles = StyleSheet.create({
   },
   section: {
     marginBottom: 24,
+  section: {
+    marginBottom: 24,
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  sectionTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  sectionTitle: {
+    fontSize: 18,
+  },
+  countBadge: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 8,
+  },
+  countBadgeText: {
+    fontSize: 12,
+  },
+  viewAllText: {
+    fontSize: 14,
+  },
+  paymentsContainer: {
+    marginBottom: 8,
+  },
+  paymentCard: {
+    marginBottom: 12,
+    padding: 16,
+  },
+  paymentCardHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  paymentCardLeft: {
+    flex: 1,
+  },
+  paymentCardTitle: {
+    fontSize: 16,
+    marginBottom: 4,
+  },
+  paymentCardSubtitle: {
+    fontSize: 14,
+  },
+  paymentCardRight: {},
+  paymentCardAmount: {
+    fontSize: 18,
+  },
+  notificationsContainer: {
+    marginBottom: 8,
+  },
+  notificationItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 8,
+    borderRadius: 8,
+    marginBottom: 8,
+  },
+  notificationIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+  },
+  notificationContent: {
+    flex: 1,
+    marginRight: 8,
+  },
+  notificationTitle: {
+    fontSize: 14,
+    marginBottom: 2,
+  },
+  notificationMessage: {
+    fontSize: 12,
+    lineHeight: 16,
+  },
+  notificationDate: {
+    fontSize: 12,
+  },
+  featuredPropertiesContainer: {
+    paddingBottom: 8,
+  },
+  propertyCard: {
+    width: 220,
+    borderRadius: 12,
+    marginRight: 16,
+    overflow: 'hidden',
+  },
+  propertyImage: {
+    width: '100%',
+    height: 120,
+  },
+  propertyCardContent: {
+    padding: 12,
+  },
+  propertyCardPrice: {
+    fontSize: 16,
+    marginBottom: 4,
+  },
+  propertyCardTitle: {
+    fontSize: 14,
+    marginBottom: 2,
+  },
+  propertyCardLocation: {
+    fontSize: 12,
+    marginBottom: 8,
+  },
+  propertyCardFeatures: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  propertyCardFeature: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  propertyCardFeatureText: {
+    fontSize: 12,
+    marginLeft: 4,
+  },
+  maintenanceCard: {
+    padding: 16,
+    marginBottom: 16,
+  },
+  maintenanceCardHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  maintenanceStatusDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginRight: 6,
+  },
+  maintenanceStatus: {
+    fontSize: 14,
+  },
+  maintenanceTitle: {
+    fontSize: 16,
+    marginBottom: 4,
+  },
+  maintenanceProperty: {
+    fontSize: 14,
+    marginBottom: 8,
+  },
+  maintenanceDescription: {
+    fontSize: 14,
+    lineHeight: 20,
+    marginBottom: 12,
+  },
+  maintenanceSchedule: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  maintenanceScheduleText: {
+    fontSize: 14,
+    marginLeft: 6,
+  },
+  emptyStateText: {
+    fontSize: 14,
+    textAlign: 'center',
+    marginVertical: 16,
+  },
+});
+
+export default DashboardScreen;
